@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "ocrlearn"
+version = "1.0.0"
+description = "Learning OCR with Python"
+authors = ["Sharizan Redzuan <sharizan_81@yahoo.com>"]
+readme = "README.md"
+
+[tool.poetry.scripts]
+start = "ocrlearn.__main__:main"
+
+[tool.poetry.dependencies]
+python = "3.12.2"
+pillow = "^10.2.0"
+opencv-python = "^4.9.0.80"
+pytesseract = "^0.3.10"
+matplotlib = "^3.8.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
