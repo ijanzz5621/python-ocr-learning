@@ -91,6 +91,18 @@ def rotateImage(cvImage, angle: float):
     newImage = cv2.warpAffine(newImage, M, (w, h), flags=cv2.INTER_CUBIC, borderMode=cv2.BORDER_REPLICATE)
     return newImage
 
+def deskew(cvImage):
+    angle = getSkewAngle(cvImage=cvImage)
+    return rotateImage(cvImage, -1.0 * angle)
+
+def remove_border(image):
+    contours, hierarchy = cv2.findContours(image, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    contoursSorted = sorted(contours, key=lambda x: cv2.contourArea(x))
+    contour = contoursSorted[-1]
+    x, y, w, h = cv2.boundingRect(contour)
+    crop = image[y:y+h, x:x+w]
+    return crop
+    
 def start():
     image_file = "data/page_01.jpg"
 
@@ -135,5 +147,25 @@ def start():
     angle = getSkewAngle(skew_image)    
     deskew_image = rotateImage(skew_image, -angle)
     cv2.imwrite("temp/deskew_page_01.JPG", deskew_image)
+    # OR
+    fixed = deskew(skew_image)
+    cv2.imwrite("temp/rotated_fixed_page_01.JPG", fixed)
     
+    # Removing border
+    rem_border_image = remove_border(noise_remove_image)
+    cv2.imwrite("temp/removed_border_page_01.jpg", rem_border_image)
+    
+    # Missing Borders - Add borders
+    color = [255, 255, 255]
+    top, bottom, left, right = [150] * 4
+    image_with_border = cv2.copyMakeBorder(
+        rem_border_image, 
+        top, 
+        bottom, 
+        left, 
+        right, 
+        cv2.BORDER_CONSTANT,
+        value=color
+    )
+    cv2.imwrite("temp/img_with_border.jpg", image_with_border)
     

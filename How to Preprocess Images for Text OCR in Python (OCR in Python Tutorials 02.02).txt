@@ -3,5 +3,11 @@ How to Preprocess Images for Text OCR in Python (OCR in Python Tutorials 02.02)
 
 https://www.youtube.com/watch?v=ADV-AjAXHdc&list=PL2VXyKi-KpYuTAZz__9KVl1jQz74bDG7i&index=4
 
-last minutes: 38:20
+#last minutes: 38:20
+
+https://www.youtube.com/watch?v=DV5c9qHv0NQ&list=PL2VXyKi-KpYuTAZz__9KVl1jQz74bDG7i&index=9
+
+minutes: 0:20
+
+
 
